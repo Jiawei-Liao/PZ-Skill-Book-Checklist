@@ -77,20 +77,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const saveName = prompt('Enter a save name: (empty is saved to current run)');
         if ((saveName !== null) && (saveName !== '')) {
             localStorage.setItem(saveName, JSON.stringify(data));
+
+            localStorage.setItem('lastLoadedRun', saveName);
+            document.getElementById('run').innerText = "Current Run: " + saveName;
+    
+            console.log(saveName + ' saved');
         }
-
-        localStorage.setItem('lastLoadedRun', saveName);
-        document.getElementById('run').innerText = "Current Run: " + saveName;
-
-        console.log(saveName + ' saved');
     };
 
     window.quickSave = function () {
         if (currentRun !== '') {
             localStorage.setItem(currentRun, JSON.stringify(data));
-        }
 
-        console.log(currentRun + ' saved')
+            console.log(currentRun + ' saved')
+        }
     };
 
     window.loadData = function () {
@@ -106,14 +106,14 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 alert('No save data found with that name.');
             }
+
+            currentRun = saveName;
+            localStorage.setItem('lastLoadedRun', saveName);
+            document.getElementById('run').innerText = "Current Run: " + saveName;
+            renderRows();
+
+            console.log(saveName + ' loaded');
         }
-
-        currentRun = saveName;
-        localStorage.setItem('lastLoadedRun', saveName);
-        document.getElementById('run').innerText = "Current Run: " + saveName;
-        renderRows();
-
-        console.log(saveName + ' loaded');
     };
     
     window.removeData = function () {
@@ -140,7 +140,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Current run is being removed, resetting to default state.")
         }
 
-        console.log(saveName + ' removed');
+        if (saveName) {
+            console.log(saveName + ' removed');
+        }
     }
 
     window.uncheckAll = function () {
