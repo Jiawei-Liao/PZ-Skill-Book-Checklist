@@ -58,10 +58,14 @@ document.addEventListener('DOMContentLoaded', function () {
         { text: 'Dancing Vol. 5', checked: false },
     ];
 
+    let quickSaveButton = document.getElementById('quick-save-button');
+
     // Remembering last loaded run for quick saving
     let currentRun = '';
-    if (localStorage.getItem('lastLoadedRun') == null) {
+    if ((localStorage.getItem('lastLoadedRun') == null) || (localStorage.getItem('lastLoadedRun') == '')) {
         localStorage.setItem('lastLoadedRun', '');
+        console.log('dsfsdfse');
+        disableQuickSaveButton();
     } else {
         currentRun = localStorage.getItem('lastLoadedRun');
     }
@@ -78,8 +82,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if ((saveName !== null) && (saveName !== '')) {
             localStorage.setItem(saveName, JSON.stringify(data));
 
+            currentRun = saveName;
             localStorage.setItem('lastLoadedRun', saveName);
             document.getElementById('run').innerText = "Current Run: " + saveName;
+            enableQuickSaveButton();
     
             console.log(saveName + ' saved');
         }
@@ -111,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem('lastLoadedRun', saveName);
             document.getElementById('run').innerText = "Current Run: " + saveName;
             renderRows();
+            enableQuickSaveButton();          
 
             console.log(saveName + ' loaded');
         }
@@ -136,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('run').innerText = '';
             data.forEach(item => item.checked = false);
             renderRows();
+            disableQuickSaveButton();
 
             console.log("Current run is being removed, resetting to default state.")
         }
@@ -184,6 +192,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 unfoundContainer.appendChild(row);
             }
         });
+    }
+
+    function mouseOverHandler() {
+        quickSaveButton.style.filter = 'brightness(80%)';
+    }
+    
+    function mouseOutHandler() {
+        quickSaveButton.style.filter = 'brightness(100%)';
+    }
+    
+    function enableQuickSaveButton() {
+        quickSaveButton.style.backgroundColor = 'darkgreen';
+        quickSaveButton.addEventListener('mouseover', mouseOverHandler);
+        quickSaveButton.addEventListener('mouseout', mouseOutHandler);
+    }
+    
+    function disableQuickSaveButton() {
+        quickSaveButton.style.backgroundColor = 'grey';
+        quickSaveButton.removeEventListener('mouseover', mouseOverHandler);
+        quickSaveButton.removeEventListener('mouseout', mouseOutHandler);
     }
 
     function toggleCheckbox(index) {
