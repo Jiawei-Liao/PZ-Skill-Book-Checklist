@@ -41,6 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
         { text: 'Mechanics Vol. 3', checked: false },
         { text: 'Mechanics Vol. 4', checked: false },
         { text: 'Mechanics Vol. 5', checked: false },
+        { text: 'Metalwork Vol. 1', checked: false },
+        { text: 'Metalwork Vol. 2', checked: false },
+        { text: 'Metalwork Vol. 3', checked: false },
+        { text: 'Metalwork Vol. 4', checked: false },
+        { text: 'Metalwork Vol. 5', checked: false },
         { text: 'Tailoring Vol. 1', checked: false },
         { text: 'Tailoring Vol. 2', checked: false },
         { text: 'Tailoring Vol. 3', checked: false },
@@ -56,6 +61,11 @@ document.addEventListener('DOMContentLoaded', function () {
         { text: 'Dancing Vol. 3', checked: false },
         { text: 'Dancing Vol. 4', checked: false },
         { text: 'Dancing Vol. 5', checked: false },
+        { text: 'Music Vol. 1', checked: false },
+        { text: 'Music Vol. 2', checked: false },
+        { text: 'Music Vol. 3', checked: false },
+        { text: 'Music Vol. 4', checked: false },
+        { text: 'Music Vol. 5', checked: false },
     ];
 
     let quickSaveButton = document.getElementById('quick-save-button');
